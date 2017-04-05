@@ -1,17 +1,27 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Aug 26 13:38:06 2014
+Updated on Wed Apr 05 09:41:47 2017
+###############################################################################
+NAME:       BeltProfiles2.py
 
+PURPOSE:    To determine band transition latitudes on Jupiter and Saturn
+            by using custom edge detection on longitudinally averaged maps
+            
+INPUTS:     Two parameters currently (4/5/17) hardcoded, "Target" and "AppYear"
+            that are used to construct custom paths, map file names and 
+             identify filtersapplicable to that apparition year.
+            
+LIBRARIES:  This code calls the BeltProfileProcessor.py, which represents the
+            start of a library. 
+
+###############################################################################
 @author: steven.hill
-
-BeltProfiles2.py
-
 """
 
 drive='f:'
 import sys
 sys.path.append('f:\\Astronomy\Python Play')
-sys.path.append('f:\\Astronomy\Python Play\BeltProfileProcessingLibraries')
+sys.path.append('f:\\Astronomy\Python Play\BeltProfiles')
 
 import matplotlib.pyplot as pl
 import pylab
@@ -25,10 +35,13 @@ import BeltProfileProcessor as BPP
 #Target="Saturn"
 Target="Jupiter"
 
+AppYear="2005"
 #AppYear="2014"
-AppYear="2015"
+#AppYear="2015"
 #AppYear="2016"
 x0,x1,xtks=0.,1.,11
+
+print "Target, AppYear=",Target, AppYear
 
 if Target=="Saturn":
     datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/"
@@ -39,6 +52,16 @@ if Target=="Saturn":
     #Offsets=np.array([0.4,0.4,0.3,0,0,0,0.4])        
     Smoothing=np.array([13,11,11,9,11,7,15])
     y0,y1,ytks=-90,90,19
+elif Target=="Jupiter" and AppYear=="2005":
+    print "IN IF STATEMENT"
+    datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/Mapping/"
+    Bands=["BLU","GRN","RED"]
+    Colors=np.array([[0.1,0.1,0.7],[0.1,0.6,0.1],
+                     [0.6,0.1,0.0],])
+    Offsets=np.array([0.0,0.0,0.0])        
+    Smoothing=np.array([5,5,5])  
+    y0,y1,ytks=-90,90,19
+    
 elif Target=="Jupiter" and AppYear=="2015":
     datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/Mapping/"
     Bands=["NUV","BLU","GRN","RED","685","CH4"]
@@ -47,6 +70,7 @@ elif Target=="Jupiter" and AppYear=="2015":
     Offsets=np.array([0.0,0.0,0.0,0,0,0,0.0])        
     Smoothing=np.array([5,5,5,5,5,5])  
     y0,y1,ytks=-90,90,19
+    
 elif Target=="Jupiter" and AppYear=="2016":
     datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/Mapping/"
     Bands=["NUV","BLU","GRN","RED","685","807","889"]
@@ -88,10 +112,12 @@ pl.setp(ax3.get_xticklabels(),visible=False)
 testimage=np.zeros((1,180))
 
 for i in range(0,len(Bands)):
-    if Target=="Jupiter" and AppYear=="2016":
-        fn=datapath+"Profile of 2016-04-03-0651.8_2016-05-04-0334.3-Hill-RGB_MAP-"+Bands[i]+"-BARE.txt"
+    if Target=="Jupiter" and AppYear=="2005":
+        fn=datapath+"Profile of 2005-Composite-Hill-Jupiter-Bare-"+Bands[i]+".txt"
     if Target=="Jupiter" and AppYear=="2015":
         fn=datapath+"Profile of 2015-03-1X-XXXX.X-Hill-"+Target+"-"+Bands[i]+"-bare.txt"
+    if Target=="Jupiter" and AppYear=="2016":
+        fn=datapath+"Profile of 2016-04-03-0651.8_2016-05-04-0334.3-Hill-RGB_MAP-"+Bands[i]+"-BARE.txt"
     if Target=="Saturn":
         fn=datapath+"Profile of 2014-Hill-"+Target+"-"+Bands[i]+"-Master-bare.txt"
     print "Band=",Bands[i]

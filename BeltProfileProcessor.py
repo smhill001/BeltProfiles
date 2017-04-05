@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Aug 27 12:12:55 2014
-
-@author: steven.hill
-
-BeltProfileProcessorJupiter1.py
+Updated on Wed Aug 27 12:12:55 2014
+###############################################################################
+BeltProfileProcessor.py
 
 INPUTS:
     filename=filename to read for the raw profile data. Data starts at the
@@ -25,11 +23,13 @@ OUTPUTS:
     ddprofile=second derivative of the brightness
     latbelts=belt/zone classification (belt=-1, zone=+1) as a fn of latitude
     belts=latitude of the belts classification (same as ddlat)
+###############################################################################
+@author: steven.hill
 """
 
 def BeltProfileProcessor(filename,colatrange,N):
     import sys
-    sys.path.append('g:\\Astronomy\Python Play')
+    sys.path.append('f:\\Astronomy\Python Play')
     #import matplotlib.pyplot as pl
     import pylab as pl
     import numpy as np
