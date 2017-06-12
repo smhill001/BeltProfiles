@@ -44,7 +44,10 @@ def BeltProfileProcessor(filename,colatrange,N):
     profile=Temp1[colatrange[0]:colatrange[1],1]
     
     latsmooth=lat
-    profilesmooth=pyasl.smooth(profile,N,'flat')/255.
+    if np.max(profile)<256: 
+        profilesmooth=pyasl.smooth(profile,N,'flat')/255.
+    elif np.max(profile)>256:
+        profilesmooth=pyasl.smooth(profile,N,'flat')/65535.
 
     dlat=latsmooth[1:]+0.5    
     dprofile=(profilesmooth[1:colatrange[1]]-profilesmooth[0:(colatrange[1]-1)])*10.+0.2

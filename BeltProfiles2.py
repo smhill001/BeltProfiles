@@ -32,18 +32,23 @@ import BeltProfileProcessor as BPP
 ###############################################################################
 #Initialize inputs and plot parameters
 
-#Target="Saturn"
-Target="Jupiter"
+Target="Saturn"
+#Target="Jupiter"
 
-AppYear="2005"
+#AppYear="2005"
+#AppYear="2006"
+#AppYear="2007"
+#AppYear="2008"
+#AppYear="2009"
+#AppYear="2010"
 #AppYear="2014"
-#AppYear="2015"
+AppYear="2015"
 #AppYear="2016"
 x0,x1,xtks=0.,1.,11
 
 print "Target, AppYear=",Target, AppYear
 
-if Target=="Saturn":
+if Target=="Saturn" and AppYear=="2014":
     datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/"
     Bands=["NUV","BLU","GRN","RED","HAL","NIR","CH4"]
     Colors=np.array([[0.4,0.2,0.6],[0.1,0.1,0.7],[0.1,0.6,0.1],
@@ -52,6 +57,17 @@ if Target=="Saturn":
     #Offsets=np.array([0.4,0.4,0.3,0,0,0,0.4])        
     Smoothing=np.array([13,11,11,9,11,7,15])
     y0,y1,ytks=-90,90,19
+    
+elif Target=="Saturn" and AppYear=="2015":
+    datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/Mapping/"
+    Bands=["NUV","BLU","GRN","RED","685","807","889"]
+    Colors=np.array([[0.4,0.2,0.6],[0.1,0.1,0.7],[0.1,0.6,0.1],
+                     [0.6,0.5,0.2],[0.6,0.1,0.0],[0.6,0.1,0.0],[0.0,0.0,0.0]])
+    Offsets=np.array([0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3])        
+    Smoothing=np.array([5,5,5,5,5,5,5])
+    y0,y1,ytks=-90,90,19
+    
+
 elif Target=="Jupiter" and AppYear=="2005":
     print "IN IF STATEMENT"
     datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/Mapping/"
@@ -62,6 +78,56 @@ elif Target=="Jupiter" and AppYear=="2005":
     Smoothing=np.array([5,5,5])  
     y0,y1,ytks=-90,90,19
     
+elif Target=="Jupiter" and AppYear=="2006":
+    print "IN IF STATEMENT"
+    datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/Mapping/"
+    Bands=["BLU","GRN","RED"]
+    Colors=np.array([[0.1,0.1,0.7],[0.1,0.6,0.1],
+                     [0.6,0.1,0.0],])
+    Offsets=np.array([0.0,0.0,0.0])        
+    Smoothing=np.array([5,5,5])  
+    y0,y1,ytks=-90,90,19
+
+elif Target=="Jupiter" and AppYear=="2007":
+    print "IN IF STATEMENT"
+    datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/Mapping/"
+    Bands=["BLU","GRN","RED"]
+    Colors=np.array([[0.1,0.1,0.7],[0.1,0.6,0.1],
+                     [0.6,0.1,0.0],])
+    Offsets=np.array([0.0,0.0,0.0])        
+    Smoothing=np.array([5,5,5])  
+    y0,y1,ytks=-90,90,19
+
+elif Target=="Jupiter" and AppYear=="2008":
+    print "IN IF STATEMENT"
+    datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/Mapping/"
+    Bands=["BLU","GRN","RED"]
+    Colors=np.array([[0.1,0.1,0.7],[0.1,0.6,0.1],
+                     [0.6,0.1,0.0],])
+    Offsets=np.array([0.0,0.0,0.0])        
+    Smoothing=np.array([5,5,5])  
+    y0,y1,ytks=-90,90,19
+
+elif Target=="Jupiter" and AppYear=="2009":
+    print "IN IF STATEMENT"
+    datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/Mapping/"
+    Bands=["BLU","GRN","RED"]
+    Colors=np.array([[0.1,0.1,0.7],[0.1,0.6,0.1],
+                     [0.6,0.1,0.0],])
+    Offsets=np.array([0.0,0.0,0.0])        
+    Smoothing=np.array([5,5,5])  
+    y0,y1,ytks=-90,90,19
+
+elif Target=="Jupiter" and AppYear=="2010":
+    print "IN IF STATEMENT"
+    datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/Mapping/"
+    Bands=["BLU","GRN","RED"]
+    Colors=np.array([[0.1,0.1,0.7],[0.1,0.6,0.1],
+                     [0.6,0.1,0.0],])
+    Offsets=np.array([0.0,0.0,0.0])        
+    Smoothing=np.array([5,5,5])  
+    y0,y1,ytks=-90,90,19
+
 elif Target=="Jupiter" and AppYear=="2015":
     datapath=drive+"//Astronomy/Projects/Planets/"+Target+"/Imaging Data/Mapping/"
     Bands=["NUV","BLU","GRN","RED","685","CH4"]
@@ -114,12 +180,24 @@ testimage=np.zeros((1,180))
 for i in range(0,len(Bands)):
     if Target=="Jupiter" and AppYear=="2005":
         fn=datapath+"Profile of 2005-Composite-Hill-Jupiter-Bare-"+Bands[i]+".txt"
+    if Target=="Jupiter" and AppYear=="2006":
+        fn=datapath+"Profile of 2006-Composite-Hill-Jupiter-Bare-"+Bands[i]+".txt"
+    if Target=="Jupiter" and AppYear=="2007":
+        fn=datapath+"Profile of 2007-Composite-Hill-Jupiter-Bare-"+Bands[i]+".txt"
+    if Target=="Jupiter" and AppYear=="2008":
+        fn=datapath+"Profile of 2008-Composite-Hill-Jupiter-Bare-"+Bands[i]+".txt"
+    if Target=="Jupiter" and AppYear=="2009":
+        fn=datapath+"Profile of 2009-Composite-Hill-Jupiter-Bare-"+Bands[i]+".txt"
+    if Target=="Jupiter" and AppYear=="2010":
+        fn=datapath+"Profile of 2010-Hill-Jupiter-RGB-Composite-Map-Bare-"+Bands[i]+".txt"
     if Target=="Jupiter" and AppYear=="2015":
         fn=datapath+"Profile of 2015-03-1X-XXXX.X-Hill-"+Target+"-"+Bands[i]+"-bare.txt"
     if Target=="Jupiter" and AppYear=="2016":
         fn=datapath+"Profile of 2016-04-03-0651.8_2016-05-04-0334.3-Hill-RGB_MAP-"+Bands[i]+"-BARE.txt"
-    if Target=="Saturn":
+    if Target=="Saturn" and AppYear=="2014":
         fn=datapath+"Profile of 2014-Hill-"+Target+"-"+Bands[i]+"-Master-bare.txt"
+    if Target=="Saturn" and AppYear=="2015":
+        fn=datapath+"Profile of 2015-Composite-Hill-Saturn-Bare-"+Bands[i]+".txt"
     print "Band=",Bands[i]
     #Compute differences for band and zone identification
     Belts,Zones,lat,profile,dlat,dprofile,ddlat,ddprofile,latbelts,belts = \
