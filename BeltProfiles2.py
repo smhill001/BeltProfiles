@@ -41,8 +41,8 @@ Target="Saturn"
 #AppYear="2008"
 #AppYear="2009"
 #AppYear="2010"
-#AppYear="2014"
-AppYear="2015"
+AppYear="2014"
+#AppYear="2015"
 #AppYear="2016"
 x0,x1,xtks=0.,1.,11
 
@@ -55,7 +55,7 @@ if Target=="Saturn" and AppYear=="2014":
                      [0.6,0.5,0.2],[0.7,0.3,0.1],[0.6,0.1,0.0],[0.0,0.0,0.0]])
     Offsets=np.array([0.0,0.0,0.0,0,0,0,0.0])        
     #Offsets=np.array([0.4,0.4,0.3,0,0,0,0.4])        
-    Smoothing=np.array([13,11,11,9,11,7,15])
+    Smoothing=np.array([13,11,5,9,11,7,15])
     y0,y1,ytks=-90,90,19
     
 elif Target=="Saturn" and AppYear=="2015":
@@ -64,7 +64,7 @@ elif Target=="Saturn" and AppYear=="2015":
     Colors=np.array([[0.4,0.2,0.6],[0.1,0.1,0.7],[0.1,0.6,0.1],
                      [0.6,0.5,0.2],[0.6,0.1,0.0],[0.6,0.1,0.0],[0.0,0.0,0.0]])
     Offsets=np.array([0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3])        
-    Smoothing=np.array([5,5,5,5,5,5,5])
+    Smoothing=np.array([11,11,7,7,7,7,9])
     y0,y1,ytks=-90,90,19
     
 
@@ -203,7 +203,7 @@ for i in range(0,len(Bands)):
     Belts,Zones,lat,profile,dlat,dprofile,ddlat,ddprofile,latbelts,belts = \
         BPP.BeltProfileProcessor(fn,[0,180],Smoothing[i])
     #Plot profiles and belt/zone identification
-    ax1.plot(profile+Offsets[i],lat,'-',color=Colors[i,:],label=Bands[i],zorder=1)
+    ax1.plot(profile+Offsets[i],lat,'-',color=Colors[i,:],label=Bands[i]+"<"+str(Smoothing[i])+">",zorder=1)
     ax3.plot(belts*0.9+(0.9-0.12*i),latbelts,'-',color=Colors[i,:],zorder=1)
     #print lat,profile
     #print dlat,dprofile
@@ -239,7 +239,7 @@ for i in range(0,len(Bands)):
         
     testimage1=sp.misc.imresize(testimage,[118,180])
 
-ax1.legend(loc=3,ncol=4, borderaxespad=0.,prop={'size':4})
+ax1.legend(loc=3,ncol=1, borderaxespad=0.,prop={'size':4})
 
 #fig2=pl.figure(figsize=(6.5, 4.5), dpi=150,facecolor="white")
 ax2=fig.add_subplot(1, 3, 2,axisbg="white")
@@ -260,9 +260,6 @@ for B in Bands:
     ax2.annotate(B, xy=(0,0),xytext=(0.5*spacing+itemp*spacing, 175),
                  horizontalalignment='center',fontsize=6,color=Colors[len(Bands)-itemp-1])
     itemp=itemp-1
-#Overplotting test, does not work right as of 8/16/2016
-#im=ax3.imshow(np.transpose(testimage1),zorder=0,cmap='gray',origin='upper',extent=[-50,50,90,-90])
-
 
 pl.subplots_adjust(left=0.08, right=0.97, top=0.93, bottom=0.10, wspace=0.001)
 

@@ -39,22 +39,26 @@ def BeltProfileProcessor(filename,colatrange,N):
     
     #Loadfile and reshape
     Temp= scipy.fromfile(file=filename, dtype=float, count=-1, sep=" ")
-    Temp1=scipy.reshape(Temp,[Temp.size/4.,4])
+    Temp1=scipy.reshape(Temp,[Temp.size/4,4])
     lat=90.-Temp1[colatrange[0]:colatrange[1],0]
     profile=Temp1[colatrange[0]:colatrange[1],1]
     
+    #Smooth profile and normalize
     latsmooth=lat
     if np.max(profile)<256: 
         profilesmooth=pyasl.smooth(profile,N,'flat')/255.
     elif np.max(profile)>256:
         profilesmooth=pyasl.smooth(profile,N,'flat')/65535.
 
+    #Compute first differences and latitude grid
     dlat=latsmooth[1:]+0.5    
     dprofile=(profilesmooth[1:colatrange[1]]-profilesmooth[0:(colatrange[1]-1)])*10.+0.2
     dprofilesmooth=pyasl.smooth(dprofile,N,'flat')
     
+    #Compute second difference and latitutde grid.
     ddlat=dlat[1:]+0.5
     ddprofile=(dprofilesmooth[0:(colatrange[1]-2)]-dprofilesmooth[1:(colatrange[1]-1)])*10.
+    
     
     belts=((ddprofile>=0.0).astype(float)-0.5)*0.1
     latbelts=ddlat
