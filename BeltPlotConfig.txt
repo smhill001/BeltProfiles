@@ -1,0 +1,2 @@
+PlotID,PlotType,X0,X1,DX,Xtype,Y0,Y1,DY,Ytype,DataList
+Jupiter_NEB,Belt,2005.,2020,1,linear,5.0,25.0,5.0,linear,JupiterBeltFiles.txt,
